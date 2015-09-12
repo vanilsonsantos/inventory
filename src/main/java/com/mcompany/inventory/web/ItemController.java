@@ -1,6 +1,7 @@
 package com.mcompany.inventory.web;
 
 import com.mcompany.inventory.model.Item;
+import com.mcompany.inventory.service.CounterService;
 import com.mcompany.inventory.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,19 +15,21 @@ import java.util.List;
 public class ItemController {
 
     private ItemService itemService;
+    private CounterService counter;
 
     @Autowired
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, CounterService counter) {
         this.itemService = itemService;
+        this.counter = counter;
     }
 
     @RequestMapping(value="/items/create/{name}", method = RequestMethod.POST)
     public void createItem(@PathVariable("name") String name) {
-        this.itemService.create(new Item(3L, name));
+        this.itemService.create(new Item(counter.getNextSequence("items"), name));
     }
 
     @RequestMapping(value="/items/delete/{id}", method = RequestMethod.DELETE)
-    public void deleteItem(@PathVariable("id") Long id) {
+    public void deleteItem(@PathVariable("id") int id) {
         this.itemService.delete(id);
     }
 
@@ -36,7 +39,7 @@ public class ItemController {
     }
 
     @RequestMapping(value="/items/{id}", method = RequestMethod.GET)
-    public Item getItemById(@PathVariable("id") Long id) {
+    public Item getItemById(@PathVariable("id") int id) {
         return itemService.findOne(id);
     }
 }

@@ -3,8 +3,6 @@ package com.mcompany.inventory.web;
 
 import com.jayway.restassured.RestAssured;
 import com.mcompany.inventory.Application;
-import com.mcompany.inventory.model.Item;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import static com.jayway.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.is;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,22 +21,20 @@ import static org.hamcrest.CoreMatchers.is;
 @IntegrationTest("server.port:0")
 public class ItemControllerTest {
 
-    private static Item newItem;
+    private final String newItemName = "Cebola Roxa";
 
     @Value("${local.server.port}")
     int port;
 
     @Before
     public void setUp() {
-        newItem = new Item(3L, "Cebola Roxa");
         RestAssured.port = port;
     }
 
     @Test
     public void shouldCreateAnItem() {
-
         when().
-                post("/items/create/{name}", newItem.getName()).
+                post("/items/create/{id}", newItemName).
         then().
                 statusCode(200);
     }
@@ -47,7 +42,6 @@ public class ItemControllerTest {
 
     @Test
     public void shouldReturnItems() {
-
         when().
                 get("/items").
         then().
@@ -57,21 +51,5 @@ public class ItemControllerTest {
     @Test
     public void shouldReturnItemsById() {
 
-        when().
-
-                get("/items/{id}", 0L).
-        then().
-
-                body("name", is("Jaca mole"));
-
     }
-
-    @AfterClass
-    public static void tearDown() {
-        when().
-                delete("/items/delete/{id}", newItem.getId()).
-                then().
-                statusCode(200);
-    }
-
 }

@@ -31,13 +31,13 @@ public class ItemService implements DbRepository<Item> {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(int id) {
         Query queryItem = new Query(Criteria.where("_id").is(id));
         mongoTemplate.remove(queryItem, COLLECTION_NAME);
     }
 
     @Override
-    public Item findOne(Long id) {
+    public Item findOne(int id) {
         Query queryItem = new Query(Criteria.where("_id").is(id));
         return mongoTemplate.findOne(queryItem, Item.class, COLLECTION_NAME);
     }

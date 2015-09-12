@@ -7,15 +7,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Item {
 
     @Id
-    private Long id;
+    private int id;
+
     private String name;
 
-    public Item(Long id, String name) {
+    public Item(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
         return id;
     }
 

@@ -14,15 +14,8 @@ public class ItemService implements DbRepository<Item> {
 
     public static final String COLLECTION_NAME = "items";
 
-    private MongoTemplate mongoTemplate;
-
     @Autowired
-    public ItemService(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-        if(!mongoTemplate.collectionExists(COLLECTION_NAME)) {
-            mongoTemplate.createCollection(COLLECTION_NAME);
-        }
-    }
+    private MongoTemplate mongoTemplate;
 
     @Override
     public void create(Item item) {
@@ -36,13 +29,13 @@ public class ItemService implements DbRepository<Item> {
 
     @Override
     public void delete(int id) {
-        Query queryItem = new Query(Criteria.where("_id").is(id));
+        Query queryItem = new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(queryItem, COLLECTION_NAME);
     }
 
     @Override
     public Item findOne(int id) {
-        Query queryItem = new Query(Criteria.where("_id").is(id));
+        Query queryItem = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(queryItem, Item.class, COLLECTION_NAME);
     }
 

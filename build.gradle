@@ -29,6 +29,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.mongeez:mongeez:0.9.4")
     compile("com.jayway.restassured:rest-assured:2.5.0")
     testCompile("junit:junit")
 }

@@ -11,7 +11,6 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'heroku'
 
 jar {
     baseName = 'gs-rest-service'
@@ -31,7 +30,6 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.mongeez:mongeez:0.9.4")
     compile("com.jayway.restassured:rest-assured:2.5.0")
-    compile("org.gradle.api.plugins:gradle-heroku:1.0.0")
     testCompile("junit:junit")
 }
 
@@ -39,13 +37,3 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
-heroku {
-    //get this from heroku
-    apiKey = '23b60f85-e213-454a-bd2c-7201ef82da1d'
-
-    //set this on first run if you don't want a generated name
-    //appName = 'some-unique-app-name'
-
-    //set this if you are not happy with the default gradlew buildpack
-    //buildpack = 'http://somebuildpack
-}

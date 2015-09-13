@@ -24,6 +24,8 @@ repositories {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+mainClassName = "Application"
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-parent:1.2.5.RELEASE")
@@ -38,6 +40,4 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
-task stage {
-    dependsOn installDist
-}
+task stage(dependsOn: ['clean', "build", 'installApp'])

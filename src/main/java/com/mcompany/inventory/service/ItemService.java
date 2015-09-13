@@ -14,14 +14,18 @@ public class ItemService implements DbRepository<Item> {
 
     public static final String COLLECTION_NAME = "items";
 
-    @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    public ItemService(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+        if(!mongoTemplate.collectionExists(COLLECTION_NAME)) {
+            mongoTemplate.createCollection(COLLECTION_NAME);
+        }
+    }
 
     @Override
     public void create(Item item) {
-        if (!mongoTemplate.collectionExists(Item.class)) {
-            mongoTemplate.createCollection(Item.class);
-        }
         mongoTemplate.insert(item, COLLECTION_NAME);
     }
 

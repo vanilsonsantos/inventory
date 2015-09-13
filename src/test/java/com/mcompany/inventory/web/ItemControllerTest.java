@@ -34,11 +34,10 @@ public class ItemControllerTest {
     @Test
     public void shouldCreateAnItem() {
         when().
-                post("/items/create/{id}", newItemName).
+                post("/items/create/{name}", newItemName).
         then().
                 statusCode(200);
     }
-
 
     @Test
     public void shouldReturnItems() {

@@ -11,6 +11,11 @@ public class Counter {
 
     private int seq;
 
+    public Counter(String id, int seq) {
+        this.id = id;
+        this.seq = seq;
+    }
+
     public void setSeq(int inc) {
         this.seq = inc;
     }

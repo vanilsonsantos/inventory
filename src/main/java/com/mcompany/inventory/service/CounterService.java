@@ -17,6 +17,10 @@ public class CounterService {
     private MongoTemplate mongo;
 
     public int getNextSequence(String collectionName) {
+        if(!mongo.collectionExists("counters")) {
+            mongo.createCollection("counters");
+            mongo.insert(new Counter(collectionName, 0));
+        }
         Query queryCounter = new Query(Criteria.where("_id").is(collectionName));
         Counter counter = mongo.findAndModify(queryCounter,
                 new Update().inc("seq", 1), options().returnNew(true),

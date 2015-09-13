@@ -24,11 +24,13 @@ repositories {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-mainClassName = "Application"
+
+springBoot {
+    mainClass = "com.mcompany.inventory.Application"
+}
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-parent:1.2.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.mongeez:mongeez:0.9.4")
@@ -40,4 +42,13 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
-task stage(dependsOn: ['clean', "compileJava", 'installApp'])
+task stage {
+    dependsOn installDist
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)

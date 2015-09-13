@@ -14,7 +14,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static com.jayway.restassured.RestAssured.expect;
 import static com.jayway.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.not;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,10 +47,11 @@ public class ItemControllerTest {
 
     @Test
     public void shouldReturnItems() {
+        expect().
+                statusCode(200).
+                body(not("[]")).
         when().
-                get("/items").
-        then().
-                statusCode(200);
+                get("/items");
     }
 
     @Test

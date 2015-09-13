@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
-        classpath("org.gradle.api.plugins:gradle-heroku:1.0.0")
+        classpath("org.gradle.api.plugins:gradle-heroku:0.9.6")
     }
 }
 

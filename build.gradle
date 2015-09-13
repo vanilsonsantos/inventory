@@ -4,7 +4,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
-        classpath("org.gradle.api.plugins:gradle-heroku:0.9.6")
     }
 }
 
@@ -32,6 +31,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.mongeez:mongeez:0.9.4")
     compile("com.jayway.restassured:rest-assured:2.5.0")
+    compile("org.gradle.api.plugins:gradle-heroku:1.0.0")
     testCompile("junit:junit")
 }
 

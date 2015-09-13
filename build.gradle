@@ -38,4 +38,13 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
 }
 
-task stage(dependsOn: ['clean', 'installApp'])
+task stage {
+    dependsOn installDist
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)

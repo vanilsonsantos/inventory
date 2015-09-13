@@ -1,0 +1,8 @@
+<mongoChangeLog>
+    <changeSet changeId="v1" author="vsantos">
+        <script>
+            db.createCollection("counters");
+            db.counters.insert({ _id: "items", seq: 0});
+        </script>
+    </changeSet>
+</mongoChangeLog>

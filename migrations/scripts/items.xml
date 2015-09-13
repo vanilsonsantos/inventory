@@ -1,0 +1,7 @@
+<mongoChangeLog>
+    <changeSet changeId="v1" author="vsantos">
+        <script>
+            db.createCollection("items");
+        </script>
+    </changeSet>
+</mongoChangeLog>

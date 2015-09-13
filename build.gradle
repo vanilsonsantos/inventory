@@ -26,6 +26,7 @@ targetCompatibility = 1.7
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-parent:1.2.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile("org.mongeez:mongeez:0.9.4")

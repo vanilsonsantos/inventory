@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -29,6 +31,8 @@ public class ItemControllerTest {
     @Before
     public void setUp() {
         RestAssured.port = port;
+        ApplicationContext context = new FileSystemXmlApplicationContext("/migrations/dao.xml");
+        context.getBean("mongeez");
     }
 
     @Test

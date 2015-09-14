@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
+
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 
 @Repository
@@ -16,7 +18,7 @@ public class CounterService {
     @Autowired
     private MongoTemplate mongo;
 
-    public int getNextSequence(String collectionName) {
+    public BigInteger getNextSequence(String collectionName) {
         Query queryCounter = new Query(Criteria.where("_id").is(collectionName));
         Counter counter = mongo.findAndModify(queryCounter,
                 new Update().inc("seq", 1), options().returnNew(true),

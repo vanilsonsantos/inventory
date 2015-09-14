@@ -31,8 +31,6 @@ public class ItemControllerTest {
     @Before
     public void setUp() {
         RestAssured.port = port;
-//        ApplicationContext context = new FileSystemXmlApplicationContext("/migrations/dao.xml");
-//        context.getBean("mongeez");
     }
 
     @Test

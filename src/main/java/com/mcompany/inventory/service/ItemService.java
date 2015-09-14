@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Repository
@@ -34,7 +35,7 @@ public class ItemService implements DbRepository<Item> {
     }
 
     @Override
-    public Item findOne(int id) {
+    public Item findOne(BigInteger id) {
         Query queryItem = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(queryItem, Item.class, COLLECTION_NAME);
     }

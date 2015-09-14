@@ -3,20 +3,22 @@ package com.mcompany.inventory.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
+
 @Document
 public class Item {
 
     @Id
-    private int id;
+    private BigInteger id;
 
     private String name;
 
-    public Item(int id, String name) {
+    public Item(BigInteger id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public void setId(int id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -24,7 +26,7 @@ public class Item {
         this.name = name;
     }
 
-    public int getId() {
+    public BigInteger getId() {
         return id;
     }
 

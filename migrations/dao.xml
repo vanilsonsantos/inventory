@@ -4,7 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="mongoUri" class="com.mongodb.MongoURI">
-        <constructor-arg value="mongodb://localhost:27017/"/>
+        <!--<constructor-arg value="mongodb://localhost:27017/"/>-->
+        <constructor-arg value="mongodb://ds033018.mongolab.com:33018/heroku_6p3x9ktl/"/>
     </bean>
 
     <bean id="mongo" class="com.mongodb.Mongo">
@@ -14,7 +15,7 @@
     <bean id="mongeez" class="org.mongeez.MongeezRunner">
         <property name="mongo" ref="mongo"/>
         <property name="executeEnabled" value="true"/>
-        <property name="dbName" value="test"/>
+        <property name="dbName" value="heroku_6p3x9ktl"/>
         <property name="file" value="/migrations/mongeez.xml"/>
     </bean>
 </beans>

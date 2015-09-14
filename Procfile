@@ -1,1 +1,1 @@
-web: -Dserver.port=$PORT build/install/Inventory/bin/Inventory
+web: build/install/Inventory/bin/Inventory

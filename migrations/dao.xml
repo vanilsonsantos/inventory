@@ -5,7 +5,7 @@
 
     <bean id="mongoUri" class="com.mongodb.MongoURI">
         <!--<constructor-arg value="mongodb://localhost:27017/"/>-->
-        <constructor-arg value="mongodb://inventory:inventory@ds035358.mongolab.com:35358/inventory"/>
+        <constructor-arg value="mongodb://inventory:inventory@ds043027.mongolab.com:43027/heroku_fw51xgvq"/>
     </bean>
 
     <bean id="mongo" class="com.mongodb.Mongo">

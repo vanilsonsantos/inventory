@@ -1,1 +1,1 @@
-web: build/install/Inventory/bin/Inventory
+web: build/install/Inventory/bin/Inventory $PORT

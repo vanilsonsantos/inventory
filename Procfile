@@ -1,1 +1,1 @@
-web: build/install/Inventory/bin/Inventory
+web: java $JAVA_OPTS -Dserver.port=$PORT build/install/Inventory/bin/Inventory

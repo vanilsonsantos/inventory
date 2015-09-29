@@ -1,7 +1,7 @@
-package com.mcompany.inventory.web;
-
+package com.mcompany.inventory.controller;
 
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
 import com.mcompany.inventory.Application;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,18 +12,14 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static com.jayway.restassured.RestAssured.expect;
-import static com.jayway.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.not;
-
+import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class ItemControllerTest {
-
-    private final String newItemName = "Cebola Roxa";
 
     @Value("${local.server.port}")
     int port;
@@ -35,23 +31,26 @@ public class ItemControllerTest {
 
     @Test
     public void shouldCreateAnItem() {
+        String expectedItem = "{\"name\":\"farofa\"}";
+
+        given().
+                contentType(ContentType.JSON).body(expectedItem).
         when().
-                post("/items/create/{name}", newItemName).
+                post("/inventory/item/create").
         then().
-                statusCode(200);
+                statusCode(200).assertThat().body(equalTo(expectedItem));
     }
 
     @Test
-    public void shouldReturnItems() {
-        expect().
-                statusCode(200).
-                body(not("[]")).
+    public void shouldReturnStatus400WhenReceivesAnInvalidBodyToCreateAnItem() {
+        String expectedItem = "{\"invalidField\":\"travesseiro\"}";
+
+        given().
+                contentType(ContentType.JSON).body(expectedItem).
         when().
-                get("/items");
-    }
-
-    @Test
-    public void shouldReturnItemsById() {
-
+                post("/inventory/item/create").
+        then().
+                statusCode(400);
     }
 }
+

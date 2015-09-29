@@ -17,13 +17,16 @@ public class ItemRepositoryTest {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Autowired
+    private CounterRepository counterRepository;
+
     @Test
     public void shouldSaveAnItemInDatabase() {
         //given
         String nameFirstItem = "um item massa";
 
         //when
-        Item firstItem = itemRepository.save(Item.item(nameFirstItem));
+        Item firstItem = itemRepository.save(Item.item(counterRepository.getNextSequence("item"), nameFirstItem));
 
         //then
         assertThat(firstItem.getName(), is(nameFirstItem));

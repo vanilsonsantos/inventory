@@ -1,5 +1,6 @@
 package com.mcompany.inventory.service;
 
+import com.mcompany.inventory.model.CounterRepository;
 import com.mcompany.inventory.model.Item;
 import com.mcompany.inventory.model.ItemRepository;
 import com.mcompany.inventory.view.ItemRequestResource;
@@ -20,10 +21,13 @@ public class ItemServiceTest {
     @Mock
     private ItemRepository itemRepository;
 
+    @Mock
+    private CounterRepository counterRepository;
+
     @Before
     public void setUp() {
         initMocks(this);
-        itemService = new ItemService(itemRepository);
+        itemService = new ItemService(itemRepository, counterRepository);
     }
 
     @Test
@@ -31,12 +35,27 @@ public class ItemServiceTest {
         //given
         String nameExpectedItem = "farofa";
         ItemRequestResource itemResource = new ItemRequestResource(nameExpectedItem);
-        when(itemRepository.save(any(Item.class))).thenReturn(Item.item(nameExpectedItem));
+        when(itemRepository.save(any(Item.class))).thenReturn(Item.item(1, nameExpectedItem));
 
         //when
         Item resultItem = itemService.createItem(itemResource);
 
         //then
         assertThat(resultItem.getName(), is(nameExpectedItem));
+    }
+
+    @Test
+    public void shouldNotCreateItemWithSameName() {
+        //given
+        ItemRequestResource itemResource = new ItemRequestResource("mangueira");
+        when(itemRepository.findOne(any(String.class))).thenReturn(Item.item(0,"arroz"));
+
+        try {
+            //when
+            itemService.createItem(itemResource);
+        } catch (Exception e) {
+            //then
+            assertThat(e.getMessage(), is("You can create an item with the same name"));
+        }
     }
 }

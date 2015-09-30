@@ -7,6 +7,7 @@ import com.mcompany.inventory.view.ItemRequestResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.http.ResponseEntity;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
@@ -38,10 +39,10 @@ public class ItemServiceTest {
         when(itemRepository.save(any(Item.class))).thenReturn(Item.item(1, nameExpectedItem));
 
         //when
-        Item resultItem = itemService.createItem(itemResource);
+        ResponseEntity resultItem = itemService.createItem(itemResource);
 
         //then
-        assertThat(resultItem.getName(), is(nameExpectedItem));
+        assertThat(((Item)resultItem.getBody()).getName(), is(nameExpectedItem));
     }
 
     @Test
@@ -50,12 +51,11 @@ public class ItemServiceTest {
         ItemRequestResource itemResource = new ItemRequestResource("mangueira");
         when(itemRepository.findByName(any(String.class))).thenReturn(Item.item(0,itemResource.getName()));
 
-        try {
-            //when
-            itemService.createItem(itemResource);
-        } catch (Exception e) {
-            //then
-            assertThat(e.getMessage(), is("You can create an item with the same name"));
-        }
+
+        //when
+        ResponseEntity response = itemService.createItem(itemResource);
+
+        //then
+        assertThat(response.getBody().toString(), is("You can create an item with the same name"));
     }
 }

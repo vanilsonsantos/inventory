@@ -42,7 +42,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void shouldReturnStatus400WhenReceivesAnInvalidBodyToCreateAnItem() {
+    public void shouldReturnStatus400WhenReceivesAnInvalidRequestBodyToCreateAnItem() {
         String expectedItem = "{\"invalidField\":\"travesseiro\"}";
 
         given().

@@ -1,6 +1,8 @@
 package com.mcompany.inventory.model;
 
 import com.mcompany.inventory.Application;
+import com.mcompany.inventory.model.repository.CounterRepository;
+import com.mcompany.inventory.model.repository.ItemRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

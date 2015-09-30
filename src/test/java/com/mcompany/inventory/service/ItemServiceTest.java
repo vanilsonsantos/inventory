@@ -1,8 +1,8 @@
 package com.mcompany.inventory.service;
 
-import com.mcompany.inventory.model.CounterRepository;
+import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.Item;
-import com.mcompany.inventory.model.ItemRepository;
+import com.mcompany.inventory.model.repository.ItemRepository;
 import com.mcompany.inventory.view.ItemRequestResource;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class ItemServiceTest {
     public void shouldNotCreateItemWithSameName() {
         //given
         ItemRequestResource itemResource = new ItemRequestResource("mangueira");
-        when(itemRepository.findOne(any(String.class))).thenReturn(Item.item(0,"arroz"));
+        when(itemRepository.findByName(any(String.class))).thenReturn(Item.item(0,itemResource.getName()));
 
         try {
             //when

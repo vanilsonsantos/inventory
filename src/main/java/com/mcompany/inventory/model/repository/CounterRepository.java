@@ -1,5 +1,6 @@
-package com.mcompany.inventory.model;
+package com.mcompany.inventory.model.repository;
 
+import com.mcompany.inventory.model.Counter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

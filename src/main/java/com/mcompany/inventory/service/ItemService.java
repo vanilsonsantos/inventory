@@ -1,8 +1,8 @@
 package com.mcompany.inventory.service;
 
-import com.mcompany.inventory.model.CounterRepository;
+import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.Item;
-import com.mcompany.inventory.model.ItemRepository;
+import com.mcompany.inventory.model.repository.ItemRepository;
 import com.mcompany.inventory.view.ItemRequestResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class ItemService {
     }
 
     public Item createItem(ItemRequestResource itemResource) {
-        if(itemRepository.findOne("") != null) {
+        if(itemRepository.findByName(itemResource.getName()) != null) {
             throw new ItemAlreadyExistsException("You can create an item with the same name");
         }
         return itemRepository.save(Item.item(counterRepository.getNextSequence("item"), itemResource.getName()));

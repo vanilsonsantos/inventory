@@ -1,6 +1,7 @@
 package com.mcompany.inventory.model;
 
 import com.mcompany.inventory.Application;
+import com.mcompany.inventory.builder.ItemBuilder;
 import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.repository.ItemRepository;
 import org.junit.Test;
@@ -25,14 +26,11 @@ public class ItemRepositoryTest {
     @Test
     public void shouldSaveAnItemInDatabase() {
         //given
-        String nameFirstItem = "um item massa";
-
+        Item item = new ItemBuilder().withId(counterRepository.getNextSequence("item")).withName("um item massa").build();
         //when
-        Item firstItem = itemRepository.save(Item.item(counterRepository.getNextSequence("item"), nameFirstItem));
+        Item firstItem = itemRepository.save(item);
 
         //then
-        assertThat(firstItem.getName(), is(nameFirstItem));
+        assertThat(firstItem.getName(), is(item.getName()));
     }
-
-
 }

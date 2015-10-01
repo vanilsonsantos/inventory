@@ -1,7 +1,8 @@
 package com.mcompany.inventory.service;
 
-import com.mcompany.inventory.model.repository.CounterRepository;
+import com.mcompany.inventory.builder.ItemBuilder;
 import com.mcompany.inventory.model.Item;
+import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.repository.ItemRepository;
 import com.mcompany.inventory.view.ItemRequestResource;
 import org.junit.Before;
@@ -33,15 +34,14 @@ public class ItemServiceTest {
 
     @Test
     public void shouldCreateItemBasedOnResource() {
-        //given
         String nameExpectedItem = "farofa";
         ItemRequestResource itemResource = new ItemRequestResource(nameExpectedItem);
-        when(itemRepository.save(any(Item.class))).thenReturn(Item.item(1, nameExpectedItem));
 
-        //when
+        Item item = new ItemBuilder().withName(nameExpectedItem).build();
+        when(itemRepository.save(any(Item.class))).thenReturn(item);
+
         ResponseEntity resultItem = itemService.createItem(itemResource);
 
-        //then
         assertThat(((Item)resultItem.getBody()).getName(), is(nameExpectedItem));
     }
 
@@ -49,13 +49,13 @@ public class ItemServiceTest {
     public void shouldNotCreateItemWithSameName() {
         //given
         ItemRequestResource itemResource = new ItemRequestResource("mangueira");
-        when(itemRepository.findByName(any(String.class))).thenReturn(Item.item(0,itemResource.getName()));
-
+        Item item = new ItemBuilder().withName(itemResource.getName()).build();
+        when(itemRepository.findByName(any(String.class))).thenReturn(item);
 
         //when
         ResponseEntity response = itemService.createItem(itemResource);
 
         //then
-        assertThat(response.getBody().toString(), is("You can create an item with the same name"));
+        assertThat(response.getBody().toString(), is("You can not create an item with the same name"));
     }
 }

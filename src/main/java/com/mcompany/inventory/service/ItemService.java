@@ -1,7 +1,7 @@
 package com.mcompany.inventory.service;
 
-import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.Item;
+import com.mcompany.inventory.model.repository.CounterRepository;
 import com.mcompany.inventory.model.repository.ItemRepository;
 import com.mcompany.inventory.view.ItemRequestResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ItemService {
 
     public ResponseEntity createItem(ItemRequestResource itemResource) {
         if(itemRepository.findByName(itemResource.getName()) != null) {
-            return new ResponseEntity("You can create an item with the same name", HttpStatus.OK);
+            return new ResponseEntity("You can not create an item with the same name", HttpStatus.OK);
         }
         Item itemCreated = itemRepository.save(Item.item(counterRepository.getNextSequence("item"), itemResource.getName()));
         return new ResponseEntity(itemCreated, HttpStatus.OK);

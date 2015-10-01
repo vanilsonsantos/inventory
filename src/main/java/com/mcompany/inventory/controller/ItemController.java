@@ -17,8 +17,8 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value="/inventory/item/create", method = RequestMethod.POST, consumes = "*/*")
+    @RequestMapping(value="/inventory/item/create", method = RequestMethod.POST)
     public ResponseEntity createItem(@Valid @RequestBody ItemRequestResource resource) {
-        return this.itemService.createItem(resource);
+        return itemService.createItem(resource);
     }
 }

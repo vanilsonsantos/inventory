@@ -31,7 +31,7 @@ public class ItemControllerTest {
 
     @Test
     public void shouldCreateAnItem() {
-        String expectedItem = "{\"name\":\"farofa\"}";
+        String expectedItem = "{\"name\":\"farofa doida\"}";
 
         given().
                 contentType(ContentType.JSON).body(expectedItem).

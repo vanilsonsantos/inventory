@@ -1,10 +1,8 @@
 package com.mcompany.inventory.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-@NoArgsConstructor
 public class Item {
 
     @Id
